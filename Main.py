@@ -4,7 +4,7 @@ import vanniekerkholiday
 from PyQt4 import QtCore, QtGui
 
 ###########################################################################Variables###########################################################################
-list1 = [];
+list1 = []
 
 ############################################################################Classes############################################################################
 class familyholiday(QtGui.QDialog, vanniekerkholiday.Ui_Dialog):
@@ -24,7 +24,7 @@ class familyholiday(QtGui.QDialog, vanniekerkholiday.Ui_Dialog):
         elif self.Moolman_rbtn.isChecked():
             name = self.FamNamSur_le.text() + " Moolman"
 
-        self.FamMem_listw.addItem(name  + ", " + age + " years of age")
+        self.FamMem_listw.addItem(name + ", " + age + " years of age")
 
         self.FamNamSur_le.setText('')
         self.Age_le.setText('')
@@ -35,8 +35,12 @@ class familyholiday(QtGui.QDialog, vanniekerkholiday.Ui_Dialog):
 
     def pairlist(self):
         newlist = sorted(list1, key=lambda k: k['age'])
+        count = len(newlist) - 1
         for x in newlist:
-            print(x)
+            if count + 1 == (len(newlist))/2:
+                break
+            self.RandomPairFamMem_listw.addItem(x['Name'] + ' ' + newlist[count]['Name'])
+            count = count - 1
 
 ########################################################################Initiate Program########################################################################
 if __name__ == "__main__":
