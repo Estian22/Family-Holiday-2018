@@ -3,14 +3,8 @@ from __future__ import division
 import vanniekerkholiday
 from PyQt4 import QtCore, QtGui
 
-
 ###########################################################################Variables###########################################################################
-names = [0, 1, 2
-         ]
-x = 1
-
-
-
+list1 = [];
 
 ############################################################################Classes############################################################################
 class familyholiday(QtGui.QDialog, vanniekerkholiday.Ui_Dialog):
@@ -21,28 +15,28 @@ class familyholiday(QtGui.QDialog, vanniekerkholiday.Ui_Dialog):
         self.Remove_pbtn.clicked.connect(self.removeItem)
         self.Pair_pbtn.clicked.connect(self.pairlist)
 
-
-
     def addList(self):
+        name = ""
+        age = self.Age_le.text()
 
         if self.vanNiekerk_rbtn.isChecked():
-            self.FamMem_listw.addItem(self.FamNamSur_le.text() + " van Niekerk" + ", " + self.Age_le.text() + " years of age")
+            name = self.FamNamSur_le.text() + " van Niekerk"
         elif self.Moolman_rbtn.isChecked():
-            self.FamMem_listw.addItem(self.FamNamSur_le.text() + " Moolman" + ", " + self.Age_le.text() + " years of age")
+            name = self.FamNamSur_le.text() + " Moolman"
+
+        self.FamMem_listw.addItem(name  + ", " + age + " years of age")
 
         self.FamNamSur_le.setText('')
         self.Age_le.setText('')
-
-
+        list1.append({'Name': name, 'age': age})
 
     def removeItem(self):
         self.FamMem_listw.takeItem(self.FamMem_listw.currentRow())
 
-
     def pairlist(self):
-        for x in names:
-            print(names)
-
+        newlist = sorted(list1, key=lambda k: k['age'])
+        for x in newlist:
+            print(x)
 
 ########################################################################Initiate Program########################################################################
 if __name__ == "__main__":
